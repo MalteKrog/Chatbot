@@ -2,9 +2,6 @@
 const loginOverlay = document.getElementById("loginOverlay");
 const nameForm = document.getElementById("nameForm");
 const nameInput = document.getElementById("nameInput");
-const chat = document.getElementById("chat");
-const composer = document.getElementById("composer");
-const messageInput = document.getElementById("messageInput");
 
 let currentUser = null;
 
@@ -14,6 +11,8 @@ window.addEventListener("DOMContentLoaded", () => {
     currentUser = savedName;
     loginOverlay.classList.add("hidden");
   }
+
+  console.log("Current user:", currentUser);
 });
 
 if (nameForm) {
@@ -32,7 +31,7 @@ if (nameForm) {
   });
 }
 
-// Besked-formular: send spørgsmål
+/* // Besked-formular: send spørgsmål
 composer.addEventListener("submit", (e) => {
   e.preventDefault();
   const text = messageInput.value.trim();
@@ -60,4 +59,4 @@ function addMessage(role, text, label) {
 
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
-}
+} */

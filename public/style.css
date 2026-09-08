@@ -31,7 +31,7 @@
       background: rgba(17, 24, 39, 0.95);
       border: 1px solid var(--border);
       border-radius: 20px;
-      overflow: hidden;
+      overflow: auto;
       display: flex;
       flex-direction: column;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
@@ -57,7 +57,7 @@
     .chat-container {
       display: flex;
       flex-direction:column;
-      height: 100%;
+      max-height: auto
     }
     .malte {
 
@@ -84,10 +84,9 @@
     }
 
     .chat {
-      flex: 1;
+      display: flex;
       padding: 24px;
       overflow-y: auto;
-      display: flex;
       flex-direction: column;
       gap: 14px;
     }
@@ -113,7 +112,7 @@
       border-top-left-radius: 4px;
     }
 
-    .message .label {
+     .label {
       display: block;
       font-size: 0.75rem;
       text-transform: uppercase;

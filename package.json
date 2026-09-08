@@ -1,0 +1,24 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MalteKrog/Chatbot.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/MalteKrog/Chatbot/issues"
+  },
+  "homepage": "https://github.com/MalteKrog/Chatbot#readme",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1"
+  }
+}

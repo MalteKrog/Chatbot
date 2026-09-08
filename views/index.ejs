@@ -4,12 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <title>AMAbot</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <main class="app">
-    <!-- Chat historik -->
-    <!-- Skal være et login pop up -->
+
     <div class="login-overlay" id="loginOverlay">
       <form class="name-form" id="nameForm">
         <h2>Velkommen 👋</h2>
@@ -28,7 +27,7 @@
 
     <section class="chat-container">
       <div class="malte">
-        <img src="assets/malte.jpg" alt="Malte Krog" />
+        <img src="/assets/malte.jpg" alt="Malte Krog" />
         <p>Hej! Jeg er Malte Krog... bla bla</p>
       </div>
 
@@ -37,17 +36,30 @@
           <span class="label">MalteBot</span>
           Hej! Stil mig et spørgsmål, så svarer jeg så godt jeg kan.
         </div>
+
+        <% for (const message of messages) { %>
+          <div class="message <%= message.type === 'question' ? 'user' : 'bot' %>">
+            <span class="label"><%= message.type === 'question' ? '' : 'MalteBot' %></span>
+            <%= message.text %>
+          </div>
+        <% } %>
       </div>
     </section>
 
-    <form class="composer" id="composer">
-      <input type="text" id="messageInput" placeholder="Skriv din besked..." />
-      <button id="send-button" type="submit">Send</button>
-    </form>
+    <% if (error) { %>
+      <p role="alert" style="color:#f87171; padding: 0 18px;"><%= error %></p>
+    <% } %>
 
-    <!-- Logik når der ikke er stillet et spørgsmål + gør det dynamisk med sender og server -->
+   <form class="composer" method="POST" action="/ask">
+    <input type="text" name="question" placeholder="Skriv din besked..." />
+    <button id="send-button" type="submit">Send</button>
+  </form>
+
+  <form method="POST" action="/clear-messages">
+    <button type="submit">Ryd beskeder</button>
+  </form>
 
   </main>
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>
