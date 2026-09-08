@@ -9,39 +9,42 @@
 <body>
   <main class="app">
     <!-- Chat historik -->
+    <!-- Skal være et login pop up -->
+    <div class="login-overlay" id="loginOverlay">
+      <form class="name-form" id="nameForm">
+        <h2>Velkommen 👋</h2>
+        <p>Skriv dit navn, for at komme i gang</p>
+        <input type="text" id="nameInput" placeholder="Skriv dit navn..." required />
+        <button type="submit">Start</button>
+      </form>
+    </div>
+
     <div class="header">
       <div class="text-header">
         <h1>Malte Krog AMAbot</h1>
-        <p>Skriv dit navn, for at komme i gang</p>
+        <p>Stil mig et spørgsmål, så svarer jeg så godt jeg kan</p>
       </div>
-     <form class="name-form">
-        <input type="text" id="nameInput" placeholder="Skriv dit navn..." />
-        <button id="send-button" type="submit">Start</button>
-      </form>
     </div>
-    <section class="chat-container">
 
+    <section class="chat-container">
       <div class="malte">
         <img src="assets/malte.jpg" alt="Malte Krog" />
         <p>Hej! Jeg er Malte Krog... bla bla</p>
       </div>
-      <div class="chat">
+
+      <div class="chat" id="chat">
         <div class="message bot">
           <span class="label">MalteBot</span>
           Hej! Stil mig et spørgsmål, så svarer jeg så godt jeg kan.
         </div>
-        
-        <div class="message user">
-          <span class="label">{user}</span>
-  
-        </div>
       </div>
     </section>
-    <form class="composer">
-      <input type="text" placeholder="Skriv din besked..." />
-      <!-- Button skal push spørgsmål -->
-      <button id="send-button" type="submit" onclick="sendMessage()">Send</button>
+
+    <form class="composer" id="composer">
+      <input type="text" id="messageInput" placeholder="Skriv din besked..." />
+      <button id="send-button" type="submit">Send</button>
     </form>
+
     <!-- Logik når der ikke er stillet et spørgsmål + gør det dynamisk med sender og server -->
 
   </main>
