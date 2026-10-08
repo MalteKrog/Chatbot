@@ -4,6 +4,9 @@ import answersRouter from "./routes/answers.js";
  
 const app = express();
 const port = 3000;
+import cors from "cors";
+
+app.use(cors());
  
 app.use(express.json());
  

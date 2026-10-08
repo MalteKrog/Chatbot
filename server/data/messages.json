@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "type": "question",
+    "text": "Bor fritid kan lide",
+    "createdAt": "2026-10-08T13:00:25.193Z"
+  },
+  {
+    "type": "answer",
+    "text": "I min fritid kan jeg godt lide at kode og lave sjove projekter som denne bot.",
+    "createdAt": "2026-10-08T13:00:25.193Z"
+  },
+  {
+    "type": "question",
+    "text": "Hej",
+    "createdAt": "2026-10-08T13:00:29.200Z"
+  },
+  {
+    "type": "answer",
+    "text": "Det kender jeg ikke svaret på endnu.",
+    "createdAt": "2026-10-08T13:00:29.200Z"
+  }
+]
