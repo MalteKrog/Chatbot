@@ -40,9 +40,12 @@
     <% } %>
 
    <form class="composer" method="POST" action="/ask">
-    <input type="text" name="question" placeholder="Skriv din besked..." />
+    <input id="question" type="text" name="question" placeholder="Skriv din besked..." />
     <button id="send-button" type="submit">Send</button>
   </form>
+  <div class="char-counter" id="char-counter">
+    <span id="char-count">0</span>/280
+  </div>
 
   <form method="POST" action="/clear-messages">
     <button type="submit">Ryd beskeder</button>
