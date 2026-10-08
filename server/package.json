@@ -5,7 +5,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "dev": "node --watch server.js",
+    "dev": "node server.js",
     "start": "node server.js"
   },
   "repository": {

@@ -1,22 +1,52 @@
 [
   {
     "type": "question",
-    "text": "Bor fritid kan lide",
-    "createdAt": "2026-10-08T13:00:25.193Z"
+    "text": "Hvad hedder du?",
+    "createdAt": "2026-10-08T19:29:52.568Z"
   },
   {
     "type": "answer",
-    "text": "I min fritid kan jeg godt lide at kode og lave sjove projekter som denne bot.",
-    "createdAt": "2026-10-08T13:00:25.193Z"
+    "text": "Jeg hedder Malte Krog. Hvad vil du ellers vide om mig?",
+    "createdAt": "2026-10-08T19:29:52.569Z"
   },
   {
     "type": "question",
-    "text": "Hej",
-    "createdAt": "2026-10-08T13:00:29.200Z"
+    "text": "a",
+    "createdAt": "2026-10-08T19:30:15.210Z"
   },
   {
     "type": "answer",
     "text": "Det kender jeg ikke svaret på endnu.",
-    "createdAt": "2026-10-08T13:00:29.200Z"
+    "createdAt": "2026-10-08T19:30:15.210Z"
+  },
+  {
+    "type": "question",
+    "text": "asws",
+    "createdAt": "2026-10-08T19:30:18.355Z"
+  },
+  {
+    "type": "answer",
+    "text": "Det kender jeg ikke svaret på endnu.",
+    "createdAt": "2026-10-08T19:30:18.356Z"
+  },
+  {
+    "type": "question",
+    "text": "dwdwdw",
+    "createdAt": "2026-10-08T19:30:19.633Z"
+  },
+  {
+    "type": "answer",
+    "text": "Det kender jeg ikke svaret på endnu.",
+    "createdAt": "2026-10-08T19:30:19.633Z"
+  },
+  {
+    "type": "question",
+    "text": "dwdw",
+    "createdAt": "2026-10-08T19:30:20.513Z"
+  },
+  {
+    "type": "answer",
+    "text": "Det kender jeg ikke svaret på endnu.",
+    "createdAt": "2026-10-08T19:30:20.513Z"
   }
 ]

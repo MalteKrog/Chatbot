@@ -2,43 +2,40 @@
 <html lang="da">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AMAbot</title>
   <link rel="stylesheet" href="public/style.css" />
   <script src="public/script.js" defer></script>
-  <script src="app.js" defer></script>
 </head>
 <body>
-  <main class="app">
+  <div class="app">
 
-    <div class="header">
-      <div class="text-header">
+    <header class="header">
+      <img class="avatar" src="public/assets/malte.jpg" alt="Malte Krog" />
+      <div class="header-text">
         <h1>Malte Krog AMAbot</h1>
-        <p>Stil mig et spørgsmål, så svarer jeg så godt jeg kan</p>
+        <p class="status"><span class="dot"></span>Online · stil mig et spørgsmål</p>
       </div>
-    </div>
+      <button type="button" id="clear-messages-button" class="clear-button">Ryd beskeder</button>
+    </header>
 
-    <section class="chat-container">
-      <div class="malte">
-        <img src="public/assets/malte.jpg" alt="Malte Krog" />
-        <p>Hej! Jeg er Malte Krog... bla bla</p>
+    <!-- script.js fylder beskeder ind her -->
+    <main class="chat" id="messages" aria-live="polite"></main>
+
+    <footer class="composer-wrap">
+      <form class="composer" id="question-form" autocomplete="off">
+        <input id="question" type="text" name="question" placeholder="Skriv en besked..." />
+        <button id="send-button" class="send" type="submit" aria-label="Send">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M3.4 20.4 21 12 3.4 3.6l-.1 6.5L15 12 3.3 13.9z" />
+          </svg>
+        </button>
+      </form>
+      <div class="char-counter" id="char-counter">
+        <span id="char-count">0</span>/280
       </div>
+    </footer>
 
-      <!-- Tom container: script.js fylder beskeder ind her -->
-      <div class="chat" id="messages"></div>
-    </section>
-
-    <form class="composer" id="question-form">
-      <input id="question" type="text" name="question" placeholder="Skriv din besked..." />
-      <button id="send-button" type="submit">Send</button>
-    </form>
-
-    <div class="char-counter" id="char-counter">
-      <span id="char-count">0</span>/280
-    </div>
-
-    <button type="button" id="clear-messages-button">Ryd beskeder</button>
-
-  </main>
+  </div>
 </body>
 </html>
