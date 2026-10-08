@@ -9,14 +9,7 @@
 <body>
   <main class="app">
 
-    <div class="login-overlay" id="loginOverlay">
-      <form class="name-form" id="nameForm">
-        <h2>Velkommen 👋</h2>
-        <p>Skriv dit navn, for at komme i gang</p>
-        <input type="text" id="nameInput" placeholder="Skriv dit navn..." required />
-        <button type="submit">Start</button>
-      </form>
-    </div>
+  
 
     <div class="header">
       <div class="text-header">
@@ -32,11 +25,7 @@
       </div>
 
       <div class="chat" id="chat">
-        <div class="message bot">
-          <span class="label">MalteBot</span>
-          Hej! Stil mig et spørgsmål, så svarer jeg så godt jeg kan.
-        </div>
-
+      
         <% for (const message of messages) { %>
           <div class="message <%= message.type === 'question' ? 'user' : 'bot' %>">
             <span class="label"><%= message.type === 'question' ? '' : 'MalteBot' %></span>
