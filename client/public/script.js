@@ -6,9 +6,7 @@ const questionForm = document.querySelector("#question-form");
 const questionInput = document.querySelector("#question");
 const clearMessagesButton = document.querySelector("#clear-messages-button");
 
-// ---------- Vis en besked ----------
-// Bruger din egen markup fra øvelse 3 (.message.user / .message.bot),
-// så din eksisterende CSS stadig virker.
+
 function displayMessage(message) {
   const isQuestion = message.type === "question";
   const html = /*html*/ `
@@ -40,7 +38,6 @@ questionForm.addEventListener("submit", async (event) => {
   const question = questionInput.value.trim();
 
   // Lille ekstra sikring, så et tomt felt ikke crasher displayMessage()
-  // (rigtig fejlhåndtering kommer i DOB 7)
   if (!question) return;
 
   const response = await fetch(`${API_URL}/messages`, {
