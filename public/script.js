@@ -1,6 +1,6 @@
 // Hent elementer
-const MAX_CHARS = 280;
-const WARNING_AT = 200;
+const maxChars = 280;
+const warning = 200;
 
 const questionInput = document.getElementById("question");
 const charCounter = document.getElementById("char-counter");
@@ -11,9 +11,9 @@ function updateCounter() {
   const length = questionInput.value.length;
 
   charCount.textContent = length;
-  charCounter.classList.toggle("warning", length >= WARNING_AT && length <= MAX_CHARS);
-  charCounter.classList.toggle("danger", length > MAX_CHARS);
-  sendButton.disabled = length > MAX_CHARS;
+  charCounter.classList.toggle("warning", length >= warning && length <= maxChars);
+  charCounter.classList.toggle("danger", length > maxChars);
+  sendButton.disabled = length > maxChars;
 }
 
 if (questionInput && charCounter && charCount && sendButton) {
