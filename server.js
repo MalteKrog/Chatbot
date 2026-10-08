@@ -9,86 +9,74 @@ app.set("view engine", "ejs");
 
 const messages = [];
 
+// Hver regel har ét regex med alternation (|).
+// \b = ordgrænse, i = ignorer store/små bogstaver.
 const answers = [
   {
     category: "navn",
-    keywords: ["navn", "hedder", "hvem er du"],
+    pattern: /\b(navn|hedder|hvem er du|præsenter)/i,
     answer: "Jeg hedder Malte Krog. Hvad vil du ellers vide om mig?"
   },
   {
     category: "bosted",
-    keywords: ["bor", "by", "fra"],
+    pattern: /\b(bor|by|fra)\b/i,
     answer: "Jeg bor i Danmark."
   },
   {
     category: "fritid",
-    keywords: ["fritid", "hobby", "kan lide"],
+    pattern: /\b(fritid|hobby|kan lide)\b/i,
     answer: "I min fritid kan jeg godt lide at kode og lave sjove projekter som denne bot."
+  },
+  {
+    // ^ = kun hvis beskeden BEGYNDER med en hilsen.
+    // Står sidst, så "Hej, hvad hedder du?" rammer navne-reglen først.
+    category: "hilsen",
+    pattern: /^(hej|goddag|hallo)\b/i,
+    answer: "Hej med dig! Hvad vil du vide om mig?"
   }
 ];
 
 const topicStats = {
   navn: 0,
   bosted: 0,
-  fritid: 0
+  fritid: 0,
+  hilsen: 0
 };
 
-/* function findAnswer(question) {
-  const normalizedQuestion = question.toLowerCase();
+function findBestAnswer(question) {
+  const text = question.trim();
 
-   const hasMatch = answerGroup.keywords.some(keyword) => {
-    normalizedQuestion.includes(keyword)
-  };
+  // match() med capture group: "jeg hedder Anna" -> nameMatch[1] = "Anna"
+  // Ligger FØR løkken, ellers vinder navne-reglen på ordet "hedder".
+  const nameMatch = text.match(/jeg hedder ([a-zæøå]+)/i);
 
-  for (const answerGroup of answers) {
-    const hasMatch = answerGroup.keywords.some((keyword) =>
-      normalizedQuestion.includes(keyword)
-    );
-
-    if (hasMatch) {
-      return answerGroup.answer;
-    }
+  if (nameMatch) {
+    // null-tjek: nameMatch er null, hvis intet matcher
+    return {
+      answer: `Hej ${nameMatch[1]}! Hyggeligt at møde dig.`,
+      category: "hilsen"
+    };
   }
 
-  return "Det kender jeg ikke svaret på endnu.";
-} */
-
-function countMatches(keywords, normalizedQuestion) {
-  const matches = keywords.filter((keyword) =>
-    normalizedQuestion.includes(keyword)
-  );
-
-  return matches.length;
-}
-function findBestAnswer(question) {
-  const normalizedQuestion = question.toLowerCase();
-  let bestScore = 0;
-  let bestAnswer = "Det kender jeg ikke svaret på endnu.";
-  let bestCategory = "";   
-
+  // search() returnerer positionen, eller -1 hvis intet matcher
   for (const answerGroup of answers) {
-    const score = countMatches(answerGroup.keywords, normalizedQuestion);
-
-    if (score > bestScore) {
-      bestScore = score;
-      bestAnswer = answerGroup.answer;
-      bestCategory = answerGroup.category; 
+    if (text.search(answerGroup.pattern) !== -1) {
+      return {
+        answer: answerGroup.answer,
+        category: answerGroup.category
+      };
     }
   }
 
   return {
-    answer: bestAnswer,
-    category: bestCategory
+    answer: "Det kender jeg ikke svaret på endnu.",
+    category: ""
   };
 }
 
 function sanitizeQuestion(input) {
   return input.replace(/[\u0000-\u001F\u007F]/g, "");
 }
-
-app.get("/", (request, response) => {
-  response.render("index", { messages, error: "" });
-});
 
 app.get("/", (request, response) => {
   response.render("index", { messages, error: "", topicStats });
