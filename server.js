@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "node:fs/promises";
 
 const app = express();
 const port = 3000;
@@ -7,7 +8,6 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
-const messages = [];
 
 const answers = [
   {
@@ -33,35 +33,34 @@ const topicStats = {
   fritid: 0
 };
 
-/* function findAnswer(question) {
-  const normalizedQuestion = question.toLowerCase();
+async function loadMessages() {
+  const data = await fs.readFile("./data/messages.json", "utf8");
+  return JSON.parse(data);
+}
 
-   const hasMatch = answerGroup.keywords.some(keyword) => {
-    normalizedQuestion.includes(keyword)
-  };
+async function saveMessages(messages) {
+  const json = JSON.stringify(messages, null, 2);
+  await fs.writeFile("./data/messages.json", json);
+}
 
-  for (const answerGroup of answers) {
-    const hasMatch = answerGroup.keywords.some((keyword) =>
-      normalizedQuestion.includes(keyword)
-    );
-
-    if (hasMatch) {
-      return answerGroup.answer;
-    }
-  }
-
-  return "Det kender jeg ikke svaret på endnu.";
-} */
+function matchesKeyword(normalizedQuestion, keyword) {
+  return normalizedQuestion.search(new RegExp("\\b" + keyword + "\\b")) !== -1;
+}
 
 function countMatches(keywords, normalizedQuestion) {
   const matches = keywords.filter((keyword) =>
-    normalizedQuestion.includes(keyword)
+    matchesKeyword(normalizedQuestion, keyword)
   );
 
   return matches.length;
 }
+
+function normalizeQuestion(question) {
+  return question.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
 function findBestAnswer(question) {
-  const normalizedQuestion = question.toLowerCase();
+  const normalizedQuestion = normalizeQuestion(question);
   let bestScore = 0;
   let bestAnswer = "Det kender jeg ikke svaret på endnu.";
   let bestCategory = "";   
@@ -86,23 +85,20 @@ function sanitizeQuestion(input) {
   return input.replace(/[\u0000-\u001F\u007F]/g, "");
 }
 
-app.get("/", (request, response) => {
-  response.render("index", { messages, error: "" });
-});
+app.get("/", async (request, response) => {
+  const messages = await loadMessages();
 
-app.get("/", (request, response) => {
   response.render("index", { messages, error: "", topicStats });
 });
 
-app.post("/ask", (request, response) => {
-  const rawQuestion = request.body.question ?? "";
-  const question = sanitizeQuestion(rawQuestion).trim();
+app.post("/ask", async (request, response) => {
+  const messages = await loadMessages();
+
+  const question = request.body.question.trim();
   let error = "";
 
   if (!question) {
     error = "Skriv et spørgsmål, før du sender.";
-  } else if (question.length > 280) {
-    error = "Spørgsmålet må højst være 280 tegn.";
   } else {
     messages.push({ type: "question", text: question });
 
@@ -114,11 +110,13 @@ app.post("/ask", (request, response) => {
     }
   }
 
+  await saveMessages(messages);
+
   response.render("index", { messages, error, topicStats });
 });
 
-app.post("/clear-messages", (request, response) => {
-  messages.length = 0;
+app.post("/clear-messages", async (request, response) => {
+  await saveMessages([]);
   response.redirect("/");
 });
 
