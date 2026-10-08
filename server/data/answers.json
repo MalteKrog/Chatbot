@@ -1,0 +1,29 @@
+[
+  {
+    "category": "navn",
+    "keywords": [
+      "navn",
+      "hedder",
+      "hvem er du"
+    ],
+    "answer": "Jeg hedder Malte Krog. Hvad vil du ellers vide om mig?"
+  },
+  {
+    "category": "bosted",
+    "keywords": [
+      "bor",
+      "by",
+      "fra"
+    ],
+    "answer": "Jeg bor i Danmark."
+  },
+  {
+    "category": "fritid",
+    "keywords": [
+      "fritid",
+      "hobby",
+      "kan lide"
+    ],
+    "answer": "I min fritid kan jeg godt lide at kode og lave sjove projekter som denne bot."
+  }
+]
